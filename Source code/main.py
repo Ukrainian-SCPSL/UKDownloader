@@ -24,7 +24,7 @@ def download_files():
         messagebox.showerror("Помилка!", "На жаль, програма підтримує встановлення тільки на Windows 10 або Windows 11.")
         return
 
-    repo_url = 'https://api.github.com/repos/YT-Narin/Ukraine-language-for-SCP-SL/releases/latest'
+    repo_url = 'https://api.github.com/repos/Ukrainian-SCPSL/Ukrainian-language/releases/latest'
     response = requests.get(repo_url)
 
     if response.status_code == 200:
@@ -55,7 +55,12 @@ def start_downloads(assets, cash_path, download_path):
 
     for index, asset in enumerate(zip_assets):
         download_url = asset['browser_download_url']
-        download_file(download_url, cash_path)
+        downloaded_file_path = download_file(download_url, cash_path)
+
+        if not is_zip_file(downloaded_file_path):
+            messagebox.showerror("Помилка!", f"Файл {downloaded_file_path} не є ZIP-архівом або він пошкоджений.")
+            return
+        
         progress_bar["value"] = index + 1
 
     # Unzip downloaded files to the chosen path
@@ -82,6 +87,15 @@ def download_file(url, path):
                 progress = int(downloaded / total_length * 100)
                 progress_text.set(f"Завантажено: {progress}%")
     response.close()
+    return file_path
+
+def is_zip_file(file_path):
+    """Check if the file is a valid ZIP archive."""
+    try:
+        with zipfile.ZipFile(file_path, 'r') as zip_ref:
+            return True
+    except zipfile.BadZipFile:
+        return False
 
 def unzip_files(zip_path, extract_path):
     zip_files = [f for f in os.listdir(zip_path) if f.endswith('.zip')]
@@ -126,7 +140,7 @@ info_label.pack(pady=0)
 info_label2 = tk.Label(root, text="Локалізація створена Narin'ом і Fencer'ом.", font=("Arial", 10))
 info_label2.pack(pady=0)
 
-version_label = tk.Label(root, text="Версія: 1.0.1\nПрограма тільки підтримує ОС: Windows 10 та Windows 11.\nПрограму створено Narin'ом.", font=("Arial", 8), anchor="se", wraplength=480)
+version_label = tk.Label(root, text="Версія: 1.0.2\nПрограма тільки підтримує ОС: Windows 10 та Windows 11.\nПрограму створено Narin'ом.", font=("Arial", 8), anchor="se", wraplength=480)
 version_label.pack(side="bottom", padx=10, pady=10)
 
 download_button = tk.Button(root, text="Завантажити", command=download_files)
