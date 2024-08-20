@@ -3,7 +3,7 @@
 ![version](https://img.shields.io/github/v/release/Ukrainian-SCPSL/UKDownloader?include_prereleases&logo=github&style=for-the-badge)
 [![discord](https://img.shields.io/discord/1052888868514447401?label=Discord&logo=discord&style=for-the-badge)](https://discord.gg/xBYJmpHptk)
 ## ENG
-Program to install the latest version of [Ukrainian localization for SCP: SL](https://github.com/Ukrainian-SCPSL/UKDownloader).                                                          
+Program to install the latest version of [Ukrainian localization for SCP: SL](https://github.com/Ukrainian-SCPSL/Ukrainian-language).                                                          
 The program was created by Narin's.                                                          
 It is allowed to use the program according to MIT license.                                                          
 [Information from Virus Total.](https://www.virustotal.com/gui/file/24484efa9e8bd884f4f617ca80b3f8df28842d0169facc878c682b6b344fc6af?nocache=1)
