@@ -8,13 +8,13 @@ The program was created by Narin's.
 It is allowed to use the program according to MIT license.                                                          
 [Information from Virus Total.](https://www.virustotal.com/gui/file/24484efa9e8bd884f4f617ca80b3f8df28842d0169facc878c682b6b344fc6af?nocache=1)
                                                           
-[Download using the installer.](https://github.com/Ukrainian-SCPSL/UKDownloader/releases/download/v1.0.1-f/UK.Downloader.Setup.exe)                                                          
-[Download using unzipping Zip-archive.](https://github.com/Ukrainian-SCPSL/UKDownloader/releases/download/v1.0.1-f/UK.Downloader.zip)                                                          
+[Download using the installer.](https://github.com/Ukrainian-SCPSL/UKDownloader/releases/download/v1.0.2/UKDownloader.Setup.exe)                                                          
+[Download using unzipping Zip-archive.](https://github.com/Ukrainian-SCPSL/UKDownloader/releases/download/v1.0.2/UKDownloader.zip)                                                          
 ## UA
 Програма для встановлення останньої версії [української локалізації для SCP: SL](https://github.com/Ukrainian-SCPSL/Ukrainian-language).                                                          
 Програму створено Narin'ом.                                                          
 Дозволено використовувати програму згідно з MIT ліцензією.                                                          
 [Інформація з Virus Total.](https://www.virustotal.com/gui/file/24484efa9e8bd884f4f617ca80b3f8df28842d0169facc878c682b6b344fc6af?nocache=1)
                                                           
-[Завантажити, використовуючи інсталятор.](https://github.com/YT-Narin/UKDownloader/releases/download/v1.0.1-f/UK.Downloader.Setup.exe)                                                           
-[Завантажити, використовуючи розпакування Zip-архіву.](https://github.com/YT-Narin/UKDownloader/releases/download/v1.0.1-f/UK.Downloader.zip)
+[Завантажити, використовуючи інсталятор.](https://github.com/YT-Narin/UKDownloader/releases/download/v1.0.2/UKDownloader.Setup.exe)                                                           
+[Завантажити, використовуючи розпакування Zip-архіву.](https://github.com/YT-Narin/UKDownloader/releases/download/v1.0.2/UKDownloader.zip)
