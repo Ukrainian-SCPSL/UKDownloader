@@ -17,4 +17,4 @@ It is allowed to use the program according to MIT license.
 [Інформація з Virus Total.](https://www.virustotal.com/gui/file/8f395d3c68bcbca94276117c6bc25b889ab6659a5e298498a5be2ff67e352fa1?nocache=1)
                                                           
 [Завантажити, використовуючи інсталятор.](https://github.com/YT-Narin/UKDownloader/releases/download/v1.0.2/UKDownloader.Setup.exe)                                                           
-[Завантажити, використовуючи розпакування Zip-архіву.](https://github.com/YT-Narin/UKDownloader/releases/download/v1.0.2/UKDownloader.zip)
+[Завантажити, використовуючи розпакування Zip-архіву.](https://github.com/Ukrainian-SCPSL/UKDownloader/releases/download/v1.0.2/UKDownloader.zip)
