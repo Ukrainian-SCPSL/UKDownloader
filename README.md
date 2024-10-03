@@ -18,3 +18,10 @@ It is allowed to use the program according to MIT license.
                                                           
 [Завантажити, використовуючи інсталятор.](https://github.com/Ukrainian-SCPSL/UKDownloader/blob/main/UKDownloader%20Setup.exe)                                                           
 [Завантажити, використовуючи розпакування Zip-архіву.](https://github.com/Ukrainian-SCPSL/UKDownloader/blob/main/UKDownloader.zip)
+
+
+
+    
+
+    
+![prewiev](https://cdn.discordapp.com/attachments/639792159469469698/1291388501564194827/image.png?ex=66ffeac3&is=66fe9943&hm=d7d62a2a9a0e912870015a9f97e815091e23155684f5c4d05c953a050978a795&)
