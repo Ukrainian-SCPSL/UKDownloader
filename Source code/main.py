@@ -11,7 +11,7 @@ import sys
 import subprocess
 import webbrowser
 
-PROGRAMVERSION = 'v1.0.2'
+PROGRAMVERSION = 'v1.1.0'
 
 def check_internet_connection():
     try:
