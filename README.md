@@ -24,4 +24,4 @@ It is allowed to use the program according to MIT license.
     
 
     
-![prewiev](https://cdn.discordapp.com/attachments/639792159469469698/1291388501564194827/image.png?ex=66ffeac3&is=66fe9943&hm=d7d62a2a9a0e912870015a9f97e815091e23155684f5c4d05c953a050978a795&)
+![prewiev](https://cdn.discordapp.com/attachments/639792159469469698/1291395465358610577/image.png?ex=66fff13f&is=66fe9fbf&hm=ae547c7cad57abc126fc92ca8086bbe866f572d4da75bcf80370ad7d3fbda72f&)
