@@ -85,7 +85,7 @@ def get_localization_version():
         combined_info_label.config(text=f"Версія програми: {PROGRAMVERSION}\nВерсія локалізації: -\nПрограма тільки підтримує ОС: Windows 10 та Windows 11.\nПрограму створено Narin'ом.")
 
 def select_folder():
-    folder_selected = filedialog.askdirectory(initialdir=os.path.join(os.path.expanduser("~"), "Documents"), title="Виберіть папку Translations у папці гри.")
+    folder_selected = filedialog.askdirectory(initialdir=os.path.join(os.path.expanduser("~"), "Documents"), title="Оберіть папку Translations у папці гри.")
     if folder_selected:
         if os.path.exists('config.json'):
             with open('config.json', 'r', encoding='utf-8') as config_file:
@@ -98,8 +98,8 @@ def select_folder():
         localization_path.set(folder_selected)
 
 def download_files():
-    if not localization_path.get() or localization_path.get() == "Виберіть папку Translations у папці гри.":
-        messagebox.showwarning("Увага!", "Виберіть папку Translations у папці гри.")
+    if not localization_path.get() or localization_path.get() == "Оберіть папку Translations у папці гри.":
+        messagebox.showwarning("Увага!", "Оберіть папку Translations у папці гри.")
         return
 
     if not check_internet_connection():
@@ -130,7 +130,7 @@ def download_files():
             download_thread = threading.Thread(target=start_downloads, args=(assets, cache_path, download_path, localization_version))
             download_thread.start()
         else:
-            messagebox.showwarning("Увага!", "Виберіть папку Translations у папці гри.")
+            messagebox.showwarning("Увага!", "Оберіть папку Translations у папці гри.")
     else:
         messagebox.showerror("Помилка!", "Помилка при отриманні інформації")
 
@@ -207,7 +207,7 @@ def remove_non_zip_files(folder_path):
             os.remove(file_path)
 
 def open_tutorial():
-    tutorial_text = "Щоб встановити локалізацію, вам потрібно пройтися за цими пунктами:\n1. Відкрити Steam -> Бібліотека -> Керування -> Подивитися локальні файли\n2. Відкрити папку Translations\n3. Скопіюйте зверху шлях до папки.\n4. У програмі натисніть на  «...».\n5. Вставте в рядок вище шлях до папки Translations і натисніть на «Вибрати папку».\n6. Натисніть на «Завантажити».\n7. Очікувайте на завантаження.\n\nГотово! Ви можете в налаштуваннях гри поставити українську мову.\n\nПрограму ви можете собі залишити, щоб у наступні рази оновлювати локалізацію.\n\nТакож у папці Документи/UKDownloader_cash зберігається кеш інсталяції, можете після встановлення локалізації очищати цю папку."
+    tutorial_text = "Щоб встановити локалізацію, вам потрібно пройтися за цими пунктами:\n1. Відкрити Steam -> Бібліотека -> Керування -> Подивитися локальні файли\n2. Відкрийте папку Translations.\n3. Скопіюйте зверху шлях до папки.\n4. У програмі натисніть на  «...».\n5. Вставте в рядок вище шлях до папки Translations і натисніть на «Вибрати папку».\n6. Натисніть на «Завантажити».\n7. Очікувайте на завантаження.\n\nГотово! Ви можете в налаштуваннях гри поставити українську мову.\n\nПрограму ви можете собі залишити, щоб у наступні рази оновлювати локалізацію.\n\nТакож у папці Документи/UKDownloader_cash зберігається кеш інсталяції, можете після встановлення локалізації очищати цю папку."
     messagebox.showinfo("Tutorial", tutorial_text)
 
 def open_discord():
@@ -250,7 +250,7 @@ info_label2 = tk.Label(root, text="Локалізація створена Narin
 info_label2.pack(pady=0)
 
 localization_path = tk.StringVar()
-localization_path.set("Виберіть папку Translations у папці гри.")
+localization_path.set("Оберіть папку Translations у папці гри.")
 
 path_frame = tk.Frame(root)
 path_frame.pack(pady=5)
@@ -294,7 +294,7 @@ progress_bar.pack(pady=5)
 if os.path.exists('config.json'):
     with open('config.json', 'r', encoding='utf-8') as config_file:
         config_data = json.load(config_file)
-        localization_path.set(config_data.get('localization_path', "Виберіть папку Translations у папці гри."))
+        localization_path.set(config_data.get('localization_path', "Оберіть папку Translations у папці гри."))
 else:
     config_data = {}
 
