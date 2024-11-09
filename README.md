@@ -24,4 +24,4 @@ It is allowed to use the program according to MIT license.
     
 
     
-![prewiev](https://cdn.discordapp.com/attachments/639792159469469698/1291395465358610577/image.png?ex=66fff13f&is=66fe9fbf&hm=ae547c7cad57abc126fc92ca8086bbe866f572d4da75bcf80370ad7d3fbda72f&)
+![preview](https://github.com/Ukrainian-SCPSL/UKDownloader/blob/main/preview.png?raw=true)
