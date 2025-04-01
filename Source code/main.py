@@ -85,7 +85,13 @@ def get_localization_version():
         combined_info_label.config(text=f"Версія програми: {PROGRAMVERSION}\nВерсія локалізації: -\nПрограма тільки підтримує ОС: Windows 10 та Windows 11.\nПрограму створено Narin'ом.")
 
 def select_folder():
-    folder_selected = filedialog.askdirectory(initialdir=os.path.join(os.path.expanduser("~"), "Documents"), title="Оберіть папку Translations у папці гри.")
+    documents_path = os.path.join(os.path.expanduser("~"), "Documents")
+    if not os.path.exists(documents_path):
+        documents_path = os.path.expanduser("~")
+    folder_selected = filedialog.askdirectory(
+        initialdir=documents_path,
+        title="Оберіть папку Translations у папці гри."
+    )
     if folder_selected:
         if os.path.exists('config.json'):
             with open('config.json', 'r', encoding='utf-8') as config_file:
