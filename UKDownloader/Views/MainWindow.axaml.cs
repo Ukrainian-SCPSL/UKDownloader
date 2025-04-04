@@ -259,7 +259,6 @@ public partial class MainWindow : Window
                 _settings.TryGetValue("settings", out var settingsObj) &&
                 settingsObj is Dictionary<string, object> innerDict)
             {
-                // ✅ сохраняем выбранную ветку и версию
                 innerDict[$"{_selectedGameTag}_latestbranch"] = branchWindow.SelectedBranch;
                 innerDict[$"{_selectedGameTag}_{branchWindow.SelectedBranch}_version"] = versionBranch;
                 SaveSettings();

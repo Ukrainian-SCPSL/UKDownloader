@@ -11,28 +11,23 @@
         ShowInTaskbar="False"
         SystemDecorations="None">
 
-	<!-- Внешний border с рамкой -->
 	<Border BorderBrush="#474747"
 			BorderThickness="4"
 			CornerRadius="11.4"
 			Background="#1E1E1E">
-		<!-- ← даёт пространство под рамку -->
 		
 		<Border Background="#1E1E1E"
 				CornerRadius="9">
 
 			<Grid RowDefinitions="Auto,*">
 
-				<!-- Верхняя часть -->
 				<Grid>
-					<!-- Слой для перемещения окна -->
 					<Rectangle Height="40"
                                Fill="Transparent"
                                HorizontalAlignment="Stretch"
                                VerticalAlignment="Top"
                                PointerPressed="OnTitleBarPressed"/>
 
-					<!-- Кнопка закрытия -->
 					<StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Top"
@@ -47,7 +42,6 @@
 						</Border>
 					</StackPanel>
 
-					<!-- Заголовок -->
 					<TextBlock Text="Доступні ігри"
                                FontFamily="avares://UKDownloader/Assets/#Montserrat"
                                FontWeight="Bold"
@@ -58,7 +52,6 @@
                                VerticalAlignment="Top"/>
 				</Grid>
 
-				<!-- Контент + кнопка -->
 				<Grid Grid.Row="1" RowDefinitions="*,Auto" Margin="10">
 					<ScrollViewer VerticalScrollBarVisibility="Visible">
 						<StackPanel x:Name="GamesPanel" Spacing="10"/>

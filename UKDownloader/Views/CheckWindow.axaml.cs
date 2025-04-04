@@ -80,7 +80,7 @@ public partial class CheckWindow : Window
             StatusText.Text = "Перевірка на оновлення...";
             Console.WriteLine("➡️ Старт перевірки оновлень...");
 
-            const string GitHubToken = "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"; // замените на свой токен
+            const string GitHubToken = "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"; // замените на свой токен
 
             using var client = new HttpClient();
             client.DefaultRequestHeaders.UserAgent.ParseAdd("UKDownloader");
