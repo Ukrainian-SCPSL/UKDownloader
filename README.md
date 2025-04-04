@@ -1,4 +1,4 @@
-<h1 align="center">UKDownloader</h1>
+<h1 align="center">UK Downloader</h1>
 <h6 align="center">The program allows you to quickly install Ukrainian localization.</h6>
 <div align="center">
 
