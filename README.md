@@ -24,4 +24,4 @@ It is allowed to use the program according to MIT license.
     
 
     
-![preview](https://github.com/Ukrainian-SCPSL/UKDownloader/blob/main/preview.png?raw=true)
+![preview](https://github.com/Narin4ik/UKDownloader/blob/main/preview.png?raw=true)
