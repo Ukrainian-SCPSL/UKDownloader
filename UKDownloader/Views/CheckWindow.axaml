@@ -1,0 +1,51 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="UKDownloader.CheckWindow"
+        Width="450"
+        Height="180"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen"
+        CanResize="False"
+        ShowInTaskbar="False"
+        SystemDecorations="None">
+
+	<Border Background="#1E1E1E"
+			BorderBrush="#474747"
+			BorderThickness="1"
+			CornerRadius="10"
+			Padding="20">
+
+		<StackPanel HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					Spacing="10">
+
+			<TextBlock x:Name="StatusText"
+					   Text="Перевірка на оновлення..."
+					   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+					   FontWeight="ExtraBold"
+					   FontSize="16"
+					   Foreground="White"
+					   HorizontalAlignment="Center"
+					   Margin="0,0,0,10"/>
+
+			<Border Width="300"
+					Height="20"
+					CornerRadius="10"
+					Background="#3C3C3C"
+					HorizontalAlignment="Center">
+				<Border x:Name="ProgressBarFill"
+						Background="White"
+						Width="0"
+						CornerRadius="12.5"
+						HorizontalAlignment="Left"/>
+			</Border>
+
+			<TextBlock x:Name="SpeedText"
+					   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+					   FontWeight="ExtraLight"
+					   FontSize="12"
+					   Foreground="White"
+					   HorizontalAlignment="Center"/>
+		</StackPanel>
+	</Border>
+</Window>

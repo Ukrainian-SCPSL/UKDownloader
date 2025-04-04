@@ -1,0 +1,404 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="UKDownloader.MainWindow"
+        Title="UK Downloader"
+        Icon="avares://UKDownloader/Assets/ico.ico"
+        Width="1160"
+        Height="650"
+        MinWidth="1160"
+        MinHeight="650"
+        Background="#1E1E1E"
+        TransparencyLevelHint="Mica, AcrylicBlur, Transparent"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="PreferSystemChrome"
+        ExtendClientAreaTitleBarHeightHint="0"
+        SystemDecorations="BorderOnly"
+        CanResize="True"
+        WindowStartupLocation="CenterScreen">
+
+	<Border Background="#1E1E1E"
+            CornerRadius="40"
+            ClipToBounds="True">
+
+	<Viewbox Stretch="Uniform">
+		<Grid Width="1160" Height="650">
+
+			<Rectangle Height="40"
+					   HorizontalAlignment="Stretch"
+					   VerticalAlignment="Top"
+					   Fill="Transparent"
+					   PointerPressed="OnTitleBarPressed" />
+
+			<!-- Левая иконка -->
+			<Border Width="85.75" Height="85.75"
+					Margin="39.75,39.6,0,0"
+					CornerRadius="17.15"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					ClipToBounds="True">
+				<Image Source="avares://UKDownloader/Assets/logo.png"
+					   Width="85.75" Height="85.75"
+					   Stretch="UniformToFill"/>
+			</Border>
+
+			<!-- 🆕 Название -->
+			<TextBlock Text="UK Downloader"
+					   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+					   FontWeight="Bold"
+					   FontSize="39.5"
+					   Foreground="#F2F2F2"
+					   Width="325.86"
+					   Height="74.06"
+					   Margin="142.66,39.6,0,0"
+					   HorizontalAlignment="Left"
+					   VerticalAlignment="Top"/>
+
+			<!-- Версия -->
+			<TextBlock x:Name="versionTextBlock"
+					   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+					   FontWeight="Normal"
+					   FontSize="17.28"
+					   Foreground="#B3B3B3"
+					   Height="21"
+					   Margin="143,82,0,0"
+					   HorizontalAlignment="Left"
+					   VerticalAlignment="Top"
+					   TextWrapping="Wrap"/>
+
+			<TextBlock Text="Про програму:"
+					   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+					   FontWeight="Bold"
+					   FontSize="25.86"
+					   Foreground="#D1D1D1"
+					   Width="227.2"
+					   Height="39.76"
+					   Margin="655,177,0,0"
+					   HorizontalAlignment="Left"
+					   VerticalAlignment="Top"/>
+
+			<TextBlock Width="451"
+					   Height="146"
+					   Margin="655,221,0,0"
+					   HorizontalAlignment="Left"
+					   VerticalAlignment="Top"
+					   TextWrapping="Wrap">
+				<TextBlock.Inlines>
+					<Run Text="UK Downloader"
+						 FontFamily="avares://UKDownloader/Assets/#Montserrat"
+						 FontWeight="Medium"
+						 FontSize="17.04"
+						 Foreground="#D1D1D1" />
+					<Run Text=" - це застосунок, розроблений нашою командою для зручного та швидкого завантаження локалізації гри. Програма забезпечує користувачам можливість у декілька кліків отримати найновішу версію української локалізації, адаптовану для комфортного ігрового досвіду."
+						 FontFamily="avares://UKDownloader/Assets/#Montserrat"
+						 FontWeight="Regular"
+						 FontSize="17.04"
+						 Foreground="#B3B3B3" />
+				</TextBlock.Inlines>
+			</TextBlock>
+
+			<TextBlock Text="Наші соц. мережі:"
+					   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+					   FontWeight="SemiBold"
+					   FontSize="25.86"
+					   Foreground="#D1D1D1"
+					   Width="284"
+					   Height="40"
+					   Margin="655,411,0,0"
+					   HorizontalAlignment="Left"
+					   VerticalAlignment="Top"/>
+
+			<!-- Discord -->
+			<Border Width="47.11" Height="47.11"
+					CornerRadius="14.13"
+					Margin="655,458,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Cursor="Hand"
+					Background="Transparent"
+					ClipToBounds="True"
+					PointerPressed="Discord_Click">
+				<Image Source="avares://UKDownloader/Assets/discord.png"
+					   Stretch="UniformToFill"
+					   RenderOptions.BitmapInterpolationMode="HighQuality"/>
+			</Border>
+
+			<!-- GitHub -->
+			<Border Width="47.11" Height="47.11"
+					CornerRadius="14.13"
+					Margin="716.11,458,0,0"
+					        HorizontalAlignment="Left"
+							VerticalAlignment="Top"
+							Cursor="Hand"
+							Background="Transparent"
+							ClipToBounds="True"
+							PointerPressed="GitHub_Click">
+						<Image Source="avares://UKDownloader/Assets/github.png"
+							   Stretch="UniformToFill"
+							   RenderOptions.BitmapInterpolationMode="HighQuality"/>
+			</Border>
+
+			<!-- YouTube -->
+			<Border Width="47.11" Height="47.11"
+					CornerRadius="14.13"
+					Margin="777.22,458,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Cursor="Hand"
+					Background="Transparent"
+					ClipToBounds="True"
+					PointerPressed="YouTube_Click">
+				<Image Source="avares://UKDownloader/Assets/youtube.png"
+					   Stretch="UniformToFill"
+					   RenderOptions.BitmapInterpolationMode="HighQuality"/>
+			</Border>
+
+			<Canvas Width="503.33"
+					Height="430.19"
+					Margin="39.75,176.81,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top">
+
+				<!-- Group 1 -->
+				<Canvas Width="497.37"
+						Height="108.62"
+						Canvas.Left="0.25"
+						Canvas.Top="-0.81">
+
+					<!-- Текст: Шлях до гри: -->
+					<TextBlock Text="Шлях до гри:"
+							   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+							   FontWeight="SemiBold"
+							   FontSize="25.86"
+							   Canvas.Left="0"
+							   Canvas.Top="0"
+							   Foreground="#D1D1D1"/>
+
+					<!-- Frame 2 (серый прямоугольник) -->
+					<Border Width="497"
+							Height="69"
+							CornerRadius="51.72"
+							Background="#3C3C3C"
+							Canvas.Left="0"
+							Canvas.Top="40.02"
+							ClipToBounds="True">
+
+						<Canvas>
+							<!-- Внутри Frame 2: текст -->
+							<TextBlock x:Name="versionGamePathTextBlock"
+									   Text="Оберіть шлях до гри."
+									   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+									   FontWeight="SemiBold"
+									   FontSize="18.1"
+									   Canvas.Left="22.87"
+									   Canvas.Top="21.51"
+									   Foreground="#747474"/>
+
+							<!-- Внутри Frame 2: иконка folder.png -->
+							<Image Source="avares://UKDownloader/Assets/folder.png"
+								   Width="57.17"
+								   Height="57.17"
+								   Canvas.Left="434"
+								   Canvas.Top="5.5"
+								   Cursor="Hand"
+								   PointerPressed="FolderIcon_Click"/>
+
+						</Canvas>
+					</Border>
+				</Canvas>
+				
+				<!-- Group 2 -->
+				<Canvas Width="497.37"
+						Height="108.62"
+						Canvas.Left="0.25"
+						Canvas.Top="0">
+
+					<!-- Гра: -->
+					<TextBlock Text="Гра:"
+							   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+							   FontWeight="SemiBold"
+							   FontSize="25.86"
+							   Width="181.04"
+							   Height="41.38"
+							   Canvas.Left="0.25"
+							   Canvas.Top="115.19"
+							   Foreground="#D1D1D1"/>
+
+					<!-- Frame 3 -->
+					<Border Width="497.37"
+							Height="68.6"
+							CornerRadius="51.72"
+							Background="#3C3C3C"
+							Canvas.Left="0.25"
+							Canvas.Top="155.21"
+							ClipToBounds="True">
+
+						<Canvas>
+
+							<!-- Текст (слева) -->
+							<TextBlock x:Name="versionGameTextBlock"
+									   Text="Оберіть гру зі списку."
+									   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+									   FontWeight="SemiBold"
+									   FontSize="18.1"
+									   Canvas.Left="22.87"
+									   Canvas.Top="21.51"
+									   Foreground="#747474"/>
+
+							<!-- Frame 3.1 заменён на изображение -->
+							<Image Source="avares://UKDownloader/Assets/frame.png"
+								   Width="57.17"
+								   Height="57.17"
+								   Canvas.Left="434"
+								   Canvas.Top="5.5"
+								   Cursor="Hand"
+								   Stretch="UniformToFill"
+								   RenderOptions.BitmapInterpolationMode="HighQuality"
+								   PointerPressed="SelectGame"/>
+						</Canvas>
+					</Border>
+				</Canvas>
+				
+				
+				<!-- Group 3 -->
+				<Canvas Width="245.83"
+						Height="108.62"
+						Canvas.Left="0.25"
+						Canvas.Top="5">
+
+					<!-- Текст: Версія: -->
+					<TextBlock Text="Версія:"
+							   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+							   FontWeight="SemiBold"
+							   FontSize="25.86"
+							   Canvas.Left="0.25"
+							   Canvas.Top="230.19"
+							   Foreground="#D1D1D1"/>
+
+					<!-- Frame 1 -->
+					<Border Width="245.83"
+							Height="68.6"
+							Background="#3C3C3C"
+							CornerRadius="51.72"
+							Canvas.Left="0.25"
+							Canvas.Top="270.21"
+							ClipToBounds="True">
+
+						<Canvas>
+							<!-- Внутренний текст -->
+							<TextBlock x:Name="versionLocTextBlock"
+									   Text="Версія локалізації."
+									   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+									   FontWeight="SemiBold"
+									   FontSize="18.1"
+									   Canvas.Left="22.87"
+									   Canvas.Top="22.87"
+									   Foreground="#747474"/>
+						</Canvas>
+					</Border>
+				</Canvas>
+
+				<!-- Group 4 -->
+				<Canvas Width="245.83"
+						Height="108.62"
+						Canvas.Left="255"
+						Canvas.Top="235">
+
+					<!-- Текст: Гілка: -->
+					<TextBlock Text="Гілка:"
+							   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+							   FontWeight="SemiBold"
+							   FontSize="25.86"
+							   Width="181.04"
+							   Height="41.38"
+							   Canvas.Left="0"
+							   Canvas.Top="0"
+							   Foreground="#D1D1D1"/>
+
+					<!-- Frame 1 -->
+					<Border Width="245.83"
+							Height="68.6"
+							CornerRadius="51.72"
+							Background="#3C3C3C"
+							Canvas.Left="0"
+							Canvas.Top="40.02"
+							ClipToBounds="True">
+
+						<Canvas>
+
+							<!-- Текст: Локалізація -->
+							<TextBlock x:Name="branchNameTextBlock"
+									   Text="Оберіть гілку."
+									   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+									   FontWeight="SemiBold"
+									   FontSize="18.1"
+									   Width="206.9"
+									   Height="20.69"
+									   Canvas.Left="22.87"
+									   Canvas.Top="22.87"
+									   Foreground="#747474"/>
+
+							<!-- Кнопка с frame.png -->
+							<Image Source="avares://UKDownloader/Assets/frame.png"
+								   Width="57.17"
+								   Height="57.17"
+								   Canvas.Left="182.25"
+								   Canvas.Top="4.84"
+								   Cursor="Hand"
+								   PointerPressed="BranchIcon_Click"/>
+						</Canvas>
+					</Border>
+				</Canvas>
+
+				<!-- Кнопка "Завантажити" -->
+				<Border Width="503"
+						Height="69"
+						Background="#D1D1D1"
+						CornerRadius="51.72"
+						Canvas.Left="0.25"
+						Canvas.Top="361.19"
+						Cursor="Hand"
+						PointerPressed="Download_Click">
+
+					<TextBlock Text="Завантажити"
+							   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+							   FontWeight="Bold"
+							   FontSize="25.86"
+							   Foreground="#212121"
+							   HorizontalAlignment="Center"
+							   VerticalAlignment="Center"/>
+
+				</Border>
+			</Canvas>
+
+
+			<!-- Правая панель кнопок -->
+			<StackPanel Orientation="Horizontal"
+						HorizontalAlignment="Right"
+						VerticalAlignment="Top"
+						Margin="0,12,16,0"
+						Spacing="12">
+
+				<Border Width="30" Height="30" Background="Transparent" Cursor="Hand">
+					<Image Source="avares://UKDownloader/Assets/minimize.png"
+						   Width="28" Height="27"
+						   PointerPressed="Minimize_Click"/>
+				</Border>
+
+				<Border Width="30" Height="30" Background="Transparent" Cursor="Hand">
+					<Image Source="avares://UKDownloader/Assets/settings.png"
+						   Width="28" Height="27"
+						   PointerPressed="Settings_Click"/>
+				</Border>
+
+				<Border Width="30" Height="30" Background="Transparent" Cursor="Hand">
+					<Image Source="avares://UKDownloader/Assets/close.png"
+						   Width="28" Height="27"
+						   PointerPressed="Close_Click"/>
+				</Border>
+
+			</StackPanel>
+
+		</Grid>
+	</Viewbox>
+	</Border>
+</Window>
