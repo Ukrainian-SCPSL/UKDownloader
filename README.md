@@ -13,11 +13,3 @@ It is allowed to use the program according to MIT license.
 Програму створено Narin'ом.                                                          
 Дозволено використовувати програму згідно з MIT ліцензією.                                                          
 [Інформація з Virus Total.](https://www.virustotal.com/gui/file/e42146b1c72a3a5ec89969c437313a19b13c1d5c0c972b357102482ae93d7a71)
- 
-
-
-
-    
-
-    
-![preview](https://github.com/Narin4ik/UKDownloader/blob/main/preview.png?raw=true)
