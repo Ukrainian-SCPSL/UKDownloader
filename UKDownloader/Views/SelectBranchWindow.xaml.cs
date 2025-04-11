@@ -47,7 +47,7 @@ public partial class SelectBranchWindow : Window
                 branch == "Latest"
                     ? !t.Contains("pre", StringComparison.OrdinalIgnoreCase)
                     : t.Contains("pre", StringComparison.OrdinalIgnoreCase)
-            ) ?? "v0.0.0";
+            ) ?? "unknown";
 
             _latestVersions[branch] = version;
 
@@ -124,7 +124,7 @@ public partial class SelectBranchWindow : Window
         }
         catch
         {
-            return new List<string> { "v1.0.0" };
+            return new List<string> { "unknown" };
         }
     }
 
