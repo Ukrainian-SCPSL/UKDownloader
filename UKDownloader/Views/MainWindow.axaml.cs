@@ -27,11 +27,18 @@ public partial class MainWindow : Window
         LoadSettings();
 
         var version = "2.0.0";
-        versionTextBlock.Text = $"Версія програми: v{version}";
+        versionTextBlock.Text = $"Версія застосунку: v{version}";
 
         var gameText = this.FindControl<TextBlock>("versionGameTextBlock");
         if (gameText is not null)
             gameText.Text = "Оберіть гру зі списку.";
+
+        OnGameChanged += () =>
+        {
+            this.FindControl<TextBlock>("branchNameTextBlock").Text = "Оберіть гілку.";
+            this.FindControl<TextBlock>("versionLocTextBlock").Text = "Версія локалізації.";
+            SelectedBranchType = string.Empty;
+        };
     }
 
     private void OnTitleBarPressed(object? sender, PointerPressedEventArgs e)
@@ -253,7 +260,7 @@ public partial class MainWindow : Window
 
         if (branchWindow.SelectedBranch is not null)
         {
-            var versionBranch = branchWindow.SelectedVersion ?? "v1.0.0";
+            var versionBranch = branchWindow.SelectedVersion ?? "unknown";
 
             if (_settings != null &&
                 _settings.TryGetValue("settings", out var settingsObj) &&
@@ -282,14 +289,13 @@ public partial class MainWindow : Window
             settingsObj is not Dictionary<string, object> innerDict ||
             !innerDict.TryGetValue($"{_selectedGameTag}_path", out var rawPath) ||
             string.IsNullOrEmpty(rawPath?.ToString()) ||
-            !innerDict.TryGetValue($"{_selectedGameTag}_latestbranch", out var rawBranch) ||
-            string.IsNullOrEmpty(rawBranch?.ToString()))
+            string.IsNullOrWhiteSpace(SelectGameWindow.SelectedBranchType))
         {
             await new ErrorWindow("Спочатку оберіть: гру, шлях до гри та гілку.").ShowDialog(this);
             return;
         }
 
-        var branch = rawBranch.ToString();
+        var branch = SelectGameWindow.SelectedBranchType.ToLower();
         var basePath = rawPath.ToString()!;
         var fullPath = Path.Combine(basePath, "Translations");
         Directory.CreateDirectory(fullPath);
@@ -298,11 +304,8 @@ public partial class MainWindow : Window
         var userRepo = repo.RepoUrl.Replace("https://github.com/", "");
         var apiUrl = $"https://api.github.com/repos/{userRepo}/releases";
 
-        const string GitHubToken = "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";
-
         using var client = new HttpClient();
         client.DefaultRequestHeaders.UserAgent.ParseAdd("UKDownloader");
-        client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", GitHubToken);
 
         string? zipUrl = null;
 

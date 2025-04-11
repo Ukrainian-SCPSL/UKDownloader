@@ -18,7 +18,6 @@
             Padding="20">
 		<Grid RowDefinitions="Auto,*,Auto">
 
-			<!-- Область для перемещения окна -->
 			<Rectangle Height="40"
                        Fill="Transparent"
                        HorizontalAlignment="Stretch"

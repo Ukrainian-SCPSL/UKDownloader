@@ -15,7 +15,7 @@ public partial class CheckWindow : Window
 {
     private const string CurrentVersion = "2.0.0";
     private const string Repo = "Ukrainian-SCPSL/UKDownloader";
-    private const bool Disabled = false;
+    private const bool Disabled = true;
 
     public CheckWindow()
     {
@@ -48,7 +48,7 @@ public partial class CheckWindow : Window
                 var client = new HttpClient();
                 client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0");
                 var watch = Stopwatch.StartNew();
-                var response = await client.GetAsync("https://api.github.com", HttpCompletionOption.ResponseHeadersRead);
+                var response = await client.GetAsync("http://api.github.com", HttpCompletionOption.ResponseHeadersRead);
                 watch.Stop();
 
                 var speed = response.Content.Headers.ContentLength.HasValue
@@ -80,11 +80,8 @@ public partial class CheckWindow : Window
             StatusText.Text = "Перевірка на оновлення...";
             Console.WriteLine("➡️ Старт перевірки оновлень...");
 
-            const string GitHubToken = "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"; // замените на свой токен
-
             using var client = new HttpClient();
             client.DefaultRequestHeaders.UserAgent.ParseAdd("UKDownloader");
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", GitHubToken);
 
             var json = await client.GetStringAsync($"https://api.github.com/repos/{Repo}/releases");
             using var doc = JsonDocument.Parse(json);

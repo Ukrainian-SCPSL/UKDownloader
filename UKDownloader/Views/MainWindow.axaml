@@ -62,7 +62,7 @@
 					   VerticalAlignment="Top"
 					   TextWrapping="Wrap"/>
 
-			<TextBlock Text="Про програму:"
+			<TextBlock Text="Про застосунок:"
 					   FontFamily="avares://UKDownloader/Assets/#Montserrat"
 					   FontWeight="Bold"
 					   FontSize="25.86"

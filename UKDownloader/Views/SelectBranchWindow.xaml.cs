@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
 
@@ -112,11 +113,8 @@ public partial class SelectBranchWindow : Window
             var parts = _repoUrl.Replace("https://github.com/", "").Split('/');
             var apiUrl = $"https://api.github.com/repos/{parts[0]}/{parts[1]}/tags";
 
-            const string GitHubToken = "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";
-
             using var client = new HttpClient();
             client.DefaultRequestHeaders.UserAgent.ParseAdd("UKDownloader");
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", GitHubToken);
             var json = await client.GetStringAsync(apiUrl);
 
             using var doc = JsonDocument.Parse(json);
@@ -158,6 +156,20 @@ public partial class SelectBranchWindow : Window
     private void Select_Click(object? sender, PointerPressedEventArgs e)
     {
         if (!string.IsNullOrEmpty(_selectedBranch))
+        {
+            if (_selectedBranch.Equals("Latest", StringComparison.OrdinalIgnoreCase))
+                SelectGameWindow.SelectedBranchType = "Latest";
+            else if (_selectedBranch.Equals("Pre-release", StringComparison.OrdinalIgnoreCase))
+                SelectGameWindow.SelectedBranchType = "Pre-release";
+            else
+                SelectGameWindow.SelectedBranchType = string.Empty;
+
             Close();
+        }
+    }
+
+    private void Close_Click(object? sender, RoutedEventArgs e)
+    {
+        Close();
     }
 }

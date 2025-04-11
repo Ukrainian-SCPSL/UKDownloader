@@ -9,39 +9,44 @@
         SystemDecorations="None">
 
 	<Border Background="#1E1E1E"
-            BorderBrush="#474747"
-            BorderThickness="2"
-            CornerRadius="11.4"
-            Width="450" Height="150"
-            Padding="20">
-		<StackPanel Spacing="10">
-			<TextBlock Text="Завантаження локалізації"
-                       FontFamily="avares://UKDownloader/Assets/#Montserrat"
-                       FontWeight="ExtraBold"
-                       FontSize="14.25"
-                       Foreground="White"
-                       HorizontalAlignment="Center"/>
+			BorderBrush="#474747"
+			BorderThickness="2"
+			CornerRadius="11.4"
+			Width="450" Height="150"
+			Padding="20">
+		<Grid>
+			<StackPanel Spacing="10"
+						VerticalAlignment="Center"
+						HorizontalAlignment="Center">
+				<TextBlock Text="Завантаження локалізації"
+						   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+						   FontWeight="ExtraBold"
+						   FontSize="14.25"
+						   Foreground="White"
+						   HorizontalAlignment="Center"/>
 
-			<Border x:Name="ProgressBarBackground"
-                    Background="#3C3C3C"
-                    Height="25"
-                    CornerRadius="12.5">
-				<Border x:Name="ProgressBarFill"
-                        Background="White"
-                        Width="0"
-                        CornerRadius="12.5"
-                        HorizontalAlignment="Left"/>
-			</Border>
+				<Border x:Name="ProgressBarBackground"
+						Background="#3C3C3C"
+						Height="25"
+						Width="350"
+						CornerRadius="12.5">
+					<Border x:Name="ProgressBarFill"
+							Background="White"
+							Width="0"
+							CornerRadius="12.5"
+							HorizontalAlignment="Left"/>
+				</Border>
 
-			<TextBlock x:Name="ProgressInfo"
-                       FontFamily="avares://UKDownloader/Assets/#Montserrat"
-                       FontWeight="ExtraLight"
-                       FontSize="10"
-                       Foreground="White"
-                       Width="283"
-                       Height="16"
-                       TextAlignment="Center"
-                       HorizontalAlignment="Center"/>
-		</StackPanel>
+				<TextBlock x:Name="ProgressInfo"
+						   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+						   FontWeight="ExtraLight"
+						   FontSize="10"
+						   Foreground="White"
+						   Width="350"
+						   Height="16"
+						   TextAlignment="Center"
+						   HorizontalAlignment="Center"/>
+			</StackPanel>
+		</Grid>
 	</Border>
 </Window>

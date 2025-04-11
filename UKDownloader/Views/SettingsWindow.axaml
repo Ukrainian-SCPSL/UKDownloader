@@ -118,7 +118,7 @@
 			</StackPanel>
 
 			<Grid Grid.Row="2">
-				<TextBlock Text="Created by Narin.&#x0a;Special thanks to Ловля."
+				<TextBlock Text="Created by Narin.&#x0a;Special thanks to Lовля."
                            FontFamily="avares://UKDownloader/Assets/#Montserrat"
                            FontWeight="ExtraLight"
                            FontSize="15"

@@ -30,6 +30,20 @@
 						   Foreground="White"
 						   VerticalAlignment="Top"
 						   Margin="0,0,0,10"/>
+				<StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Spacing="12">
+					<Border Width="30"
+                            Height="30"
+                            Background="Transparent"
+                            Cursor="Hand"
+                            PointerPressed="Close_Click">
+						<Image Source="avares://UKDownloader/Assets/close.png"
+                               Width="28"
+                               Height="28"/>
+					</Border>
+				</StackPanel>
 				<TextBlock Text="Остання версія"
 						   FontFamily="avares://UKDownloader/Assets/#Montserrat"
 						   FontWeight="ExtraBold"

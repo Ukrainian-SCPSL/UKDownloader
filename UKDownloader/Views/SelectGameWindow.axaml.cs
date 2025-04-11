@@ -28,6 +28,8 @@ public partial class SelectGameWindow : Window
 
     private string? _selectedGameTag = null;
     public string? SelectedGameTag => _selectedGameTag;
+    public static string SelectedBranchType = string.Empty;
+    public static event Action? OnGameChanged;
 
     public SelectGameWindow()
     {
@@ -116,6 +118,8 @@ public partial class SelectGameWindow : Window
     {
         if (!string.IsNullOrEmpty(_selectedGameTag))
         {
+            SelectedBranchType = string.Empty;
+            OnGameChanged?.Invoke();
             Close();
         }
     }
