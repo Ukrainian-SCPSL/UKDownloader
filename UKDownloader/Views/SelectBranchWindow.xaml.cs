@@ -164,12 +164,14 @@ public partial class SelectBranchWindow : Window
             else
                 SelectGameWindow.SelectedBranchType = string.Empty;
 
+            DiscordPresenceManager.UpdateState("Готується до встановлення 🎯");
             Close();
         }
     }
 
     private void Close_Click(object? sender, RoutedEventArgs e)
     {
+        DiscordPresenceManager.UpdateState("Готується до встановлення 🎯");
         Close();
     }
 }

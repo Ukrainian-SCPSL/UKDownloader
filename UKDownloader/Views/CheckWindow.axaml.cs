@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -8,21 +9,25 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Threading;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace UKDownloader;
 
 public partial class CheckWindow : Window
 {
-    private const string CurrentVersion = "2.0.0";
+    private const string CurrentVersion = Program.AppVersion;
     private const string Repo = "Ukrainian-SCPSL/UKDownloader";
-    private const bool Disabled = true;
+    private const bool Disabled = false;
 
     public CheckWindow()
     {
+        DiscordPresenceManager.UpdateState("Перевірка на оновлення 🔎");
         InitializeComponent();
 
         if (Disabled)
         {
+            DiscordPresenceManager.UpdateState("Готується до встановлення 🎯");
             OpenMainWindow();
             return;
         }
@@ -32,8 +37,7 @@ public partial class CheckWindow : Window
 
     private async void SimulateCheckAsync()
     {
-        var rnd = new Random();
-        var delay = rnd.Next(2000, 5000);
+        var delay = new Random().Next(2000, 5000);
         var startTime = DateTime.Now;
 
         var timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(100) };
@@ -48,7 +52,7 @@ public partial class CheckWindow : Window
                 var client = new HttpClient();
                 client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0");
                 var watch = Stopwatch.StartNew();
-                var response = await client.GetAsync("http://api.github.com", HttpCompletionOption.ResponseHeadersRead);
+                var response = await client.GetAsync("https://api.github.com");
                 watch.Stop();
 
                 var speed = response.Content.Headers.ContentLength.HasValue
@@ -77,8 +81,12 @@ public partial class CheckWindow : Window
 
         try
         {
-            StatusText.Text = "Перевірка на оновлення...";
-            Console.WriteLine("➡️ Старт перевірки оновлень...");
+            var selectedBranch = LoadInstallerBranch();
+            if (string.IsNullOrWhiteSpace(selectedBranch))
+                selectedBranch = SettingsWindow.SelectedInstallerVersion;
+
+            StatusText.Text = $"Перевірка на оновлення...";
+            Console.WriteLine($"➡️ Перевірка: {selectedBranch}");
 
             using var client = new HttpClient();
             client.DefaultRequestHeaders.UserAgent.ParseAdd("UKDownloader");
@@ -86,77 +94,67 @@ public partial class CheckWindow : Window
             var json = await client.GetStringAsync($"https://api.github.com/repos/{Repo}/releases");
             using var doc = JsonDocument.Parse(json);
 
-            var latest = doc.RootElement.EnumerateArray().FirstOrDefault(r =>
-                r.TryGetProperty("prerelease", out var pre) && !pre.GetBoolean());
+            var release = doc.RootElement.EnumerateArray()
+                .FirstOrDefault(r =>
+                    r.TryGetProperty("prerelease", out var pre) &&
+                    (selectedBranch == "Latest" && !pre.GetBoolean() ||
+                     selectedBranch == "Pre-release" && pre.GetBoolean()));
 
-            if (latest.ValueKind == JsonValueKind.Undefined)
+            if (release.ValueKind == JsonValueKind.Undefined)
             {
-                Console.WriteLine("❌ Оновлення не знайдено, відкриваємо головне вікно.");
+                Console.WriteLine("❌ Реліз не знайдено.");
                 OpenMainWindow();
                 return;
             }
 
-            latestVersionStr = latest.GetProperty("tag_name").GetString()?.TrimStart('v') ?? "0.0.0";
-            Console.WriteLine($"ℹ️ Остання версія: {latestVersionStr}");
-
-            if (!Version.TryParse(CurrentVersion.TrimStart('v'), out var currentVersion) ||
-                !Version.TryParse(latestVersionStr, out var latestVersion))
+            latestVersionStr = release.GetProperty("tag_name").GetString()?.TrimStart('v');
+            if (!Version.TryParse(CurrentVersion.TrimStart('v'), out var localVer) ||
+                !Version.TryParse(latestVersionStr, out var remoteVer))
             {
-                await ShowError($"Не вдалося розпізнати версію: поточна = {CurrentVersion}, остання = {latestVersionStr}");
+                await ShowError($"Помилка версії: поточна = {CurrentVersion}, нова = {latestVersionStr}");
                 return;
             }
 
-            if (currentVersion >= latestVersion)
+            if (localVer >= remoteVer)
             {
-                Console.WriteLine("✅ Поточна версія новіша або рівна останній. Пропуск оновлення.");
+                Console.WriteLine("✅ Оновлення не потрібно.");
                 OpenMainWindow();
                 return;
             }
 
-            StatusText.Text = "Скачування нової версії...";
-            Console.WriteLine("⬇️ Скачування нової версії...");
+            Console.WriteLine("⬇️ Доступне нове оновлення.");
 
-            var asset = latest.GetProperty("assets").EnumerateArray()
+            var asset = release.GetProperty("assets").EnumerateArray()
                 .FirstOrDefault(a =>
-                    a.TryGetProperty("name", out var nameProp) &&
-                    nameProp.GetString()?.EndsWith(".exe", StringComparison.OrdinalIgnoreCase) == true &&
-                    a.TryGetProperty("browser_download_url", out _));
+                    a.GetProperty("name").GetString()?.EndsWith(".exe", StringComparison.OrdinalIgnoreCase) == true);
 
             if (asset.ValueKind == JsonValueKind.Undefined)
             {
-                await ShowError("Не знайдено інсталяційний файл (.exe) в останньому релізі.");
+                await ShowError("Інсталятор не знайдено в релізі.");
                 return;
             }
 
             downloadUrl = asset.GetProperty("browser_download_url").GetString();
             if (string.IsNullOrWhiteSpace(downloadUrl))
             {
-                await ShowError("URL інсталятора порожній.");
+                await ShowError("Порожній URL завантаження.");
                 return;
             }
-
-            Console.WriteLine($"📥 URL для скачування: {downloadUrl}");
 
             var docs = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             var cacheDir = Path.Combine(docs, "UKDownloader", "cash");
             Directory.CreateDirectory(cacheDir);
 
-            var exePath = Path.Combine(cacheDir, $"programlatest-{latestVersionStr}.exe");
-            Console.WriteLine($"📁 Шлях для збереження: {exePath}");
+            var exePath = Path.Combine(cacheDir, $"program-{selectedBranch.ToLower()}-{latestVersionStr}.exe");
 
             using var response = await client.GetAsync(downloadUrl);
             response.EnsureSuccessStatusCode();
-            Console.WriteLine($"✅ Відповідь HTTP: {(int)response.StatusCode} {response.ReasonPhrase}");
 
             await using (var input = await response.Content.ReadAsStreamAsync())
             await using (var output = File.Create(exePath))
-            {
                 await input.CopyToAsync(output);
-            }
 
-            StatusText.Text = "Запуск програми інсталятора...";
             Console.WriteLine("🚀 Запуск інсталятора...");
-
             Process.Start(new ProcessStartInfo
             {
                 FileName = exePath,
@@ -167,19 +165,29 @@ public partial class CheckWindow : Window
         }
         catch (Exception ex)
         {
-            Console.WriteLine("❌ Виникла помилка при перевірці оновлення!");
-            Console.WriteLine($"⛔ {ex.GetType().Name}: {ex.Message}");
-            Console.WriteLine(ex.StackTrace);
-
-            var details = $"Помилка під час перевірки оновлення.\n" +
-                          $"Поточна версія: {CurrentVersion}\n" +
-                          $"Остання: {latestVersionStr ?? "невідома"}\n" +
-                          $"URL: {downloadUrl ?? "немає"}\n" +
-                          $"Помилка: {ex.Message}";
-
-            await ShowError(details);
+            Console.WriteLine("❌ Помилка перевірки оновлення:");
+            Console.WriteLine(ex);
+            await ShowError($"Помилка оновлення.\nПоточна: {CurrentVersion}\nНова: {latestVersionStr ?? "?"}\n{ex.Message}");
             Environment.Exit(0);
         }
+    }
+
+    private string? LoadInstallerBranch()
+    {
+        var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UKDownloader", "settings.yml");
+
+        if (!File.Exists(path)) return null;
+
+        var yaml = File.ReadAllText(path);
+        var deserializer = new DeserializerBuilder()
+            .WithNamingConvention(UnderscoredNamingConvention.Instance)
+            .Build();
+
+        var root = deserializer.Deserialize<Dictionary<string, Dictionary<string, object>>>(yaml);
+        return root.TryGetValue("settings", out var settings) &&
+               settings.TryGetValue("ap_selected", out var selected)
+            ? selected.ToString()
+            : null;
     }
 
     private async Task ShowError(string message)
@@ -191,20 +199,10 @@ public partial class CheckWindow : Window
     {
         Dispatcher.UIThread.InvokeAsync(() =>
         {
+            DiscordPresenceManager.UpdateState("Готується до встановлення 🎯");
             new MainWindow().Show();
             Close();
         });
-    }
-
-    private static bool IsNewerVersion(string remote, string local)
-    {
-        if (!Version.TryParse(remote.TrimStart('v', 'V'), out var r))
-            return false;
-
-        if (!Version.TryParse(local.TrimStart('v', 'V'), out var l))
-            return false;
-
-        return r > l;
     }
 
     private void OnTitleBarPressed(object? sender, PointerPressedEventArgs e)

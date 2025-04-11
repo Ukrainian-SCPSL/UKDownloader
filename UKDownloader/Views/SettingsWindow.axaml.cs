@@ -6,13 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Microsoft.Win32;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace UKDownloader;
 
 public partial class SettingsWindow : Window
 {
+    public static string SelectedInstallerVersion { get; private set; } = "Latest";
     private bool _autoUpdateEnabled = false;
     private Dictionary<string, object>? _settings;
 
@@ -21,6 +21,7 @@ public partial class SettingsWindow : Window
         InitializeComponent();
         LoadSettings();
         UpdateToggleVisuals();
+        UpdateInstallerToggleVisuals();
     }
 
     private void LoadSettings()
@@ -30,16 +31,15 @@ public partial class SettingsWindow : Window
         if (!File.Exists(path))
         {
             Directory.CreateDirectory(Path.GetDirectoryName(path)!);
-            File.WriteAllText(path, "settings:\n  scpsl_path: 'null'\n  aul: false");
+            File.WriteAllText(path, "settings:\n  scpsl_path: 'null'\n  aul: false\n  ap_selected: 'Latest'");
         }
 
         var lines = File.ReadAllLines(path);
         foreach (var line in lines)
         {
-            if (line.Trim().StartsWith("aul:"))
+            if (line.Trim().StartsWith("ap_selected:"))
             {
-                _autoUpdateEnabled = line.Trim().EndsWith("true");
-                break;
+                SelectedInstallerVersion = line.Trim().Split(":")[1].Trim(' ', '\'');
             }
         }
     }
@@ -51,11 +51,13 @@ public partial class SettingsWindow : Window
         if (!File.Exists(path))
         {
             Directory.CreateDirectory(Path.GetDirectoryName(path)!);
-            File.WriteAllText(path, "settings:\n  scpsl_path: 'null'\n  aul: false");
+            File.WriteAllText(path, "settings:\n  scpsl_path: 'null'\n  aul: false\n  ap_selected: 'Latest'");
         }
 
         var lines = File.ReadAllLines(path);
-        var updated = false;
+        var updatedAul = false;
+        var updatedAp = false;
+
         using var writer = new StreamWriter(path);
 
         foreach (var line in lines)
@@ -63,7 +65,12 @@ public partial class SettingsWindow : Window
             if (line.Trim().StartsWith("aul:"))
             {
                 writer.WriteLine($"  aul: {_autoUpdateEnabled.ToString().ToLower()}");
-                updated = true;
+                updatedAul = true;
+            }
+            else if (line.Trim().StartsWith("ap_selected:"))
+            {
+                writer.WriteLine($"  ap_selected: '{SettingsWindow.SelectedInstallerVersion}'");
+                updatedAp = true;
             }
             else
             {
@@ -71,10 +78,11 @@ public partial class SettingsWindow : Window
             }
         }
 
-        if (!updated)
-        {
+        if (!updatedAul)
             writer.WriteLine($"  aul: {_autoUpdateEnabled.ToString().ToLower()}");
-        }
+
+        if (!updatedAp)
+            writer.WriteLine($"  ap_selected: '{SettingsWindow.SelectedInstallerVersion}'");
     }
 
     private void UpdateToggleVisuals()
@@ -94,6 +102,26 @@ public partial class SettingsWindow : Window
 
             ToggleOnText.Foreground = Brushes.White;
             ToggleOffText.Foreground = Brushes.Black;
+        }
+    }
+
+    private void UpdateInstallerToggleVisuals()
+    {
+        if (SelectedInstallerVersion == "Pre-release")
+        {
+            ToggleInstallerPre.Background = Brushes.White;
+            ToggleInstallerPreText.Foreground = Brushes.Black;
+
+            ToggleInstallerLatest.Background = new SolidColorBrush(Color.Parse("#474747"));
+            ToggleInstallerLatestText.Foreground = Brushes.White;
+        }
+        else
+        {
+            ToggleInstallerLatest.Background = Brushes.White;
+            ToggleInstallerLatestText.Foreground = Brushes.Black;
+
+            ToggleInstallerPre.Background = new SolidColorBrush(Color.Parse("#474747"));
+            ToggleInstallerPreText.Foreground = Brushes.White;
         }
     }
 
@@ -125,6 +153,18 @@ public partial class SettingsWindow : Window
             else
                 key?.DeleteValue(appName, false);
         });
+    }
+
+    private void EnableLatestInstaller_Click(object? sender, RoutedEventArgs e)
+    {
+        SelectedInstallerVersion = "Latest";
+        UpdateInstallerToggleVisuals();
+    }
+
+    private void EnablePreInstaller_Click(object? sender, RoutedEventArgs e)
+    {
+        SelectedInstallerVersion = "Pre-release";
+        UpdateInstallerToggleVisuals();
     }
 
     private void Close_Click(object? sender, RoutedEventArgs e)

@@ -1,20 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+using Avalonia;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Avalonia;
 using YamlDotNet.Serialization;
+using System.Collections.Generic;
 using YamlDotNet.Serialization.NamingConventions;
 
 namespace UKDownloader;
 
 internal sealed class Program
 {
+    public const string AppVersion = "2.0.0";
+
     [STAThread]
     public static void Main(string[] args)
     {
@@ -29,6 +30,7 @@ internal sealed class Program
         else
         {
             Console.WriteLine("[UKDownloader] Запуск з UI.");
+            DiscordPresenceManager.Initialize();
             BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
         }
     }

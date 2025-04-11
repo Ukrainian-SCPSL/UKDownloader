@@ -5,7 +5,6 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net.Http;
-using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Avalonia.Controls;
@@ -26,7 +25,7 @@ public partial class MainWindow : Window
         InitializeComponent();
         LoadSettings();
 
-        var version = "2.0.0";
+        var version = Program.AppVersion;
         versionTextBlock.Text = $"Версія застосунку: v{version}";
 
         var gameText = this.FindControl<TextBlock>("versionGameTextBlock");
@@ -39,6 +38,12 @@ public partial class MainWindow : Window
             this.FindControl<TextBlock>("versionLocTextBlock").Text = "Версія локалізації.";
             SelectedBranchType = string.Empty;
         };
+    }
+
+    protected override void OnOpened(EventArgs e)
+    {
+        base.OnOpened(e);
+        DiscordPresenceManager.UpdateState("Готується до встановлення 🎯");
     }
 
     private void OnTitleBarPressed(object? sender, PointerPressedEventArgs e)
@@ -92,6 +97,7 @@ public partial class MainWindow : Window
 
     private async void SelectGame(object? sender, PointerPressedEventArgs e)
     {
+        DiscordPresenceManager.UpdateState("Обирає гру 🎮");
         var selectWindow = new SelectGameWindow();
         await selectWindow.ShowDialog(this);
 
@@ -255,6 +261,7 @@ public partial class MainWindow : Window
         var game = SelectGameWindow.AvailableGames.FirstOrDefault(x => x.Tag == _selectedGameTag);
         if (game is null) return;
 
+        DiscordPresenceManager.UpdateState("Обирає гілку гри 📚");
         var branchWindow = new SelectBranchWindow(game.RepoUrl, game.HasBeta);
         await branchWindow.ShowDialog(this);
 
@@ -362,6 +369,7 @@ public partial class MainWindow : Window
         var nextIndex = existingZips.Length;
         var zipPath = Path.Combine(cacheDir, $"{_selectedGameTag}-{nextIndex}.zip");
 
+        DiscordPresenceManager.UpdateState("Завантажує локалізацію 🌍");
         var progressWindow = new DownloadProgressWindow();
         progressWindow.Show();
 
@@ -414,6 +422,7 @@ public partial class MainWindow : Window
             ZipFile.ExtractToDirectory(zipPath, fullPath, true);
             progressWindow.Close();
 
+            DiscordPresenceManager.UpdateState("Готується до встановлення 🎯");
             var done = new SuccessWindow();
             await done.ShowDialog(this);
         }

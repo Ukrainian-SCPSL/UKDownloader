@@ -111,6 +111,7 @@ public partial class SelectGameWindow : Window
 
     private void Close_Click(object? sender, PointerPressedEventArgs e)
     {
+        DiscordPresenceManager.UpdateState("Готується до встановлення 🎯");
         Close();
     }
 
@@ -120,6 +121,7 @@ public partial class SelectGameWindow : Window
         {
             SelectedBranchType = string.Empty;
             OnGameChanged?.Invoke();
+            DiscordPresenceManager.UpdateState("Готується до встановлення 🎯");
             Close();
         }
     }

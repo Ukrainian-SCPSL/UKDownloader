@@ -48,11 +48,9 @@
 				</StackPanel>
 			</Grid>
 
-			<StackPanel Grid.Row="1"
-						Margin="0,20,0,0"
-						Spacing="20">
-
-				<Grid ColumnDefinitions="Auto,*" VerticalAlignment="Top" Margin="0,10,0,0" Height="50">
+			<StackPanel Grid.Row="1" Margin="0,20,0,0" Spacing="28">
+				<!-- Первая строка: автообновление + пояснение -->
+				<Grid ColumnDefinitions="Auto,*" VerticalAlignment="Top" Height="50">
 					<TextBlock Text="Автооновлення&#x0a;локалізації"
 							   FontFamily="avares://UKDownloader/Assets/#Montserrat"
 							   FontSize="15"
@@ -68,33 +66,84 @@
 							CornerRadius="8.55"
 							Padding="2"
 							HorizontalAlignment="Left">
-						<StackPanel Orientation="Horizontal" Spacing="0">
-							<Border x:Name="ToggleOn"
-									Width="140"
-									Height="40"
-									Background="#474747"
-									CornerRadius="8.55"
-									PointerPressed="EnableAutoUpdate_Click"
-									Cursor="Hand">
-								<TextBlock x:Name="ToggleOnText"
-										   Text="Вкл."
-										   HorizontalAlignment="Center"
-										   VerticalAlignment="Center"
-										   FontFamily="avares://UKDownloader/Assets/#Montserrat"
-										   FontWeight="SemiBold"
-										   FontSize="15"
-										   Foreground="White"/>
-							</Border>
+						<Grid>
+							<StackPanel Orientation="Horizontal">
+								<Border x:Name="ToggleOn"
+										Width="140"
+										Height="40"
+										Background="#474747"
+										CornerRadius="8.55"
+										PointerPressed="EnableAutoUpdate_Click"
+										Cursor="Hand">
+									<TextBlock x:Name="ToggleOnText"
+											   Text="Вмк."
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center"
+											   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+											   FontWeight="SemiBold"
+											   FontSize="15"
+											   Foreground="White"/>
+								</Border>
 
-							<Border x:Name="ToggleOff"
+								<Border x:Name="ToggleOff"
+										Width="140"
+										Height="40"
+										Background="White"
+										CornerRadius="8.55"
+										PointerPressed="DisableAutoUpdate_Click"
+										Cursor="Hand">
+									<TextBlock x:Name="ToggleOffText"
+											   Text="Вимк."
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center"
+											   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+											   FontWeight="SemiBold"
+											   FontSize="15"
+											   Foreground="Black"/>
+								</Border>
+							</StackPanel>
+
+							<TextBlock Text="* Експерементальна функція,&#x0a;поки повністю не реалізована."
+									   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+									   FontWeight="SemiBold"
+									   FontSize="13"
+									   Foreground="#D1D1D1"
+									   Margin="0,70,0,0"
+									   Width="238"
+									   Height="50"
+									   TextWrapping="Wrap"
+									   HorizontalAlignment="Right"/>
+						</Grid>
+					</Border>
+				</Grid>
+
+				<!-- Вторая строка: версия инсталлятора -->
+				<Grid ColumnDefinitions="Auto,*" VerticalAlignment="Top" Height="50" Margin="0,6,0,0">
+					<TextBlock Text="Версія&#x0a;інсталятора"
+							   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+							   FontSize="15"
+							   FontWeight="SemiBold"
+							   Foreground="#D1D1D1"
+							   VerticalAlignment="Center"
+							   Margin="-15,0,20,0"/>
+
+					<Border Grid.Column="1"
+							Background="#323232"
+							Width="288"
+							Height="46"
+							CornerRadius="8.55"
+							Padding="2"
+							HorizontalAlignment="Left">
+						<StackPanel Orientation="Horizontal" Spacing="0">
+							<Border x:Name="ToggleInstallerLatest"
 									Width="140"
 									Height="40"
 									Background="White"
 									CornerRadius="8.55"
-									PointerPressed="DisableAutoUpdate_Click"
+									PointerPressed="EnableLatestInstaller_Click"
 									Cursor="Hand">
-								<TextBlock x:Name="ToggleOffText"
-										   Text="Вимк."
+								<TextBlock x:Name="ToggleInstallerLatestText"
+										   Text="Latest"
 										   HorizontalAlignment="Center"
 										   VerticalAlignment="Center"
 										   FontFamily="avares://UKDownloader/Assets/#Montserrat"
@@ -102,16 +151,23 @@
 										   FontSize="15"
 										   Foreground="Black"/>
 							</Border>
-							<TextBlock Text="* Експерементальна функція,&#x0a;поки повністю не реалізована."
-									   Margin="-210,65,0,0"
-									   FontFamily="avares://UKDownloader/Assets/#Montserrat"
-									   FontWeight="SemiBold"
-									   FontSize="13"
-									   Foreground="#D1D1D1"
-									   Width="238"
-									   Height="75"
-									   TextWrapping="Wrap"
-									   HorizontalAlignment="Right"/>
+
+							<Border x:Name="ToggleInstallerPre"
+									Width="140"
+									Height="40"
+									Background="#474747"
+									CornerRadius="8.55"
+									PointerPressed="EnablePreInstaller_Click"
+									Cursor="Hand">
+								<TextBlock x:Name="ToggleInstallerPreText"
+										   Text="Pre-release"
+										   HorizontalAlignment="Center"
+										   VerticalAlignment="Center"
+										   FontFamily="avares://UKDownloader/Assets/#Montserrat"
+										   FontWeight="SemiBold"
+										   FontSize="15"
+										   Foreground="White"/>
+							</Border>
 						</StackPanel>
 					</Border>
 				</Grid>
