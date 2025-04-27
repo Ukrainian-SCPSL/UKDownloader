@@ -1,0 +1,65 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="UKDownloader.SuccessWindow"
+        Width="600"
+        Height="180"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False"
+        ShowInTaskbar="False"
+        SystemDecorations="None"
+        Background="Transparent">
+
+	<Border Background="#1E1E1E"
+            BorderBrush="#474747"
+            BorderThickness="3"
+            CornerRadius="40"
+            Width="600"
+            Height="180"
+            Padding="20">
+		<Grid RowDefinitions="Auto,*,Auto">
+
+			<Rectangle Height="40"
+                       Fill="Transparent"
+                       HorizontalAlignment="Stretch"
+                       VerticalAlignment="Top"
+                       PointerPressed="OnTitleBarPressed"/>
+
+			<TextBlock Text="Успішно"
+                       FontFamily="avares://UKDownloader/Assets/#Montserrat"
+                       FontWeight="ExtraBold"
+                       FontSize="30"
+                       Foreground="White"
+                       Margin="0,0,0,10"/>
+
+			<TextBlock Text="Вітаємо! Ви успішно встановили локалізацію. Можете закривати застосунок."
+                       Grid.Row="1"
+                       FontFamily="avares://UKDownloader/Assets/#Montserrat"
+                       FontWeight="ExtraLight"
+                       FontSize="15"
+                       Foreground="White"
+                       Margin="0,6,0,0"
+                       TextWrapping="Wrap"/>
+
+			<Border Grid.Row="2"
+                    Width="180"
+                    Height="25"
+                    Background="White"
+                    CornerRadius="8.55"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Cursor="Hand"
+                    Margin="0,10,0,0"
+                    PointerPressed="Close_Click">
+				<TextBlock Text="Зрозуміло"
+                           FontFamily="avares://UKDownloader/Assets/#Montserrat"
+                           FontWeight="SemiBold"
+                           FontSize="15"
+                           Foreground="Black"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           TextAlignment="Center"/>
+			</Border>
+
+		</Grid>
+	</Border>
+</Window>
