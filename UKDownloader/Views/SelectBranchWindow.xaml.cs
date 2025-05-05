@@ -45,8 +45,12 @@ public partial class SelectBranchWindow : Window
         {
             var version = tags.FirstOrDefault(t =>
                 branch == "Latest"
-                    ? !t.Contains("pre", StringComparison.OrdinalIgnoreCase)
-                    : t.Contains("pre", StringComparison.OrdinalIgnoreCase)
+                    ? !t.Contains("pre", StringComparison.OrdinalIgnoreCase) &&
+                      !t.Contains("beta", StringComparison.OrdinalIgnoreCase) &&
+                      !t.Contains("alpha", StringComparison.OrdinalIgnoreCase)
+                    : t.Contains("pre", StringComparison.OrdinalIgnoreCase) ||
+                      t.Contains("beta", StringComparison.OrdinalIgnoreCase) ||
+                      t.Contains("alpha", StringComparison.OrdinalIgnoreCase)
             ) ?? "unknown";
 
             _latestVersions[branch] = version;

@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Input;
 using Avalonia.Threading;
 using YamlDotNet.Serialization;
@@ -167,8 +169,28 @@ public partial class CheckWindow : Window
         {
             Console.WriteLine("❌ Помилка перевірки оновлення:");
             Console.WriteLine(ex);
-            await ShowError($"Помилка оновлення.\nПоточна: {CurrentVersion}\nНова: {latestVersionStr ?? "?"}\n{ex.Message}");
-            Environment.Exit(0);
+
+            Dispatcher.UIThread.Post(() =>
+            {
+                var main = new MainWindow();
+
+                if (Application.Current?.ApplicationLifetime
+                    is IClassicDesktopStyleApplicationLifetime desktop)
+                {
+                    desktop.MainWindow = main;
+                }
+
+                main.Opened += async (_, _) =>
+                {
+                    await new ErrorWindow(
+                        "Не вдалося оновити застосунок до останньої версії.\n" +
+                        "Спробуйте встановити вручну через Setup або повторіть пізніше."
+                    ).ShowDialog(main);
+                };
+                main.Show();
+
+                this.Close();
+            });
         }
     }
 

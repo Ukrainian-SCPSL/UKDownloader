@@ -49,7 +49,6 @@
 			</Grid>
 
 			<StackPanel Grid.Row="1" Margin="0,20,0,0" Spacing="28">
-				<!-- Первая строка: автообновление + пояснение -->
 				<Grid ColumnDefinitions="Auto,*" VerticalAlignment="Top" Height="50">
 					<TextBlock Text="Автооновлення&#x0a;локалізації"
 							   FontFamily="avares://UKDownloader/Assets/#Montserrat"
@@ -62,10 +61,11 @@
 					<Border Grid.Column="1"
 							Background="#323232"
 							Width="288"
-							Height="46"
+							Height="43"
 							CornerRadius="8.55"
 							Padding="2"
-							HorizontalAlignment="Left">
+							HorizontalAlignment="Left"
+							Margin="0,0,0,0">
 						<Grid>
 							<StackPanel Orientation="Horizontal">
 								<Border x:Name="ToggleOn"
@@ -108,7 +108,7 @@
 									   FontWeight="SemiBold"
 									   FontSize="13"
 									   Foreground="#D1D1D1"
-									   Margin="0,70,0,0"
+									   Margin="0,71,0,0"
 									   Width="238"
 									   Height="50"
 									   TextWrapping="Wrap"
@@ -117,7 +117,6 @@
 					</Border>
 				</Grid>
 
-				<!-- Вторая строка: версия инсталлятора -->
 				<Grid ColumnDefinitions="Auto,*" VerticalAlignment="Top" Height="50" Margin="0,6,0,0">
 					<TextBlock Text="Версія&#x0a;інсталятора"
 							   FontFamily="avares://UKDownloader/Assets/#Montserrat"
@@ -130,10 +129,11 @@
 					<Border Grid.Column="1"
 							Background="#323232"
 							Width="288"
-							Height="46"
+							Height="43"
 							CornerRadius="8.55"
 							Padding="2"
-							HorizontalAlignment="Left">
+							HorizontalAlignment="Left"
+							Margin="30,0,0,0">
 						<StackPanel Orientation="Horizontal" Spacing="0">
 							<Border x:Name="ToggleInstallerLatest"
 									Width="140"
