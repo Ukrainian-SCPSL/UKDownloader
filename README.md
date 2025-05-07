@@ -2,11 +2,11 @@
 <h6 align="center">The program allows you to quickly install Ukrainian localization.</h6>
 <div align="center">
 
-![Downloads](https://img.shields.io/github/downloads/Ukrainian-SCPSL/UKDownloader/total?style=flat-square&label=Завантажень)
-![Version](https://img.shields.io/github/v/release/Ukrainian-SCPSL/UKDownloader?style=flat-square&label=Версія)
-![License](https://img.shields.io/github/license/Ukrainian-SCPSL/UKDownloader?style=flat-square&label=Ліцензія)
-![Contributors](https://img.shields.io/github/contributors/Ukrainian-SCPSL/UKDownloader?style=flat-square&label=Розробників)
-![Issues](https://img.shields.io/github/issues/Ukrainian-SCPSL/UKDownloader?style=flat-square&label=Помилок)
+![Downloads](https://img.shields.io/github/downloads/Ukrainian-SCPSL/UKDownloader/total?style=flat-square&label=Завантажень&logo=github)
+![Version](https://img.shields.io/github/v/release/Ukrainian-SCPSL/UKDownloader?style=flat-square&label=Версія&logo=github)
+![License](https://img.shields.io/github/license/Ukrainian-SCPSL/UKDownloader?style=flat-square&label=Ліцензія&logo=github)
+![Contributors](https://img.shields.io/github/contributors/Ukrainian-SCPSL/UKDownloader?style=flat-square&label=Розробників&logo=github)
+![Issues](https://img.shields.io/github/issues/Ukrainian-SCPSL/UKDownloader?style=flat-square&label=Помилок&logo=github)
 
 </div>
 
