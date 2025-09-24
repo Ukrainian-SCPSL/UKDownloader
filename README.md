@@ -14,3 +14,5 @@
 Програму створено Narin'ом.                                                          
 Дозволено використовувати програму згідно з MIT ліцензією.                                                          
 Інформація з [Virus Total](https://www.virustotal.com/gui/file/666ff7de3e8b04a21be74a6cbbc2886eb31686d6cd4a30eecdbeeb7b8e2865f0?nocache=1).
+
+![Preview](https://github.com/Ukrainian-SCPSL/UKDownloader/blob/main/UKDownloader/preview.png)
